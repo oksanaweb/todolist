@@ -1,0 +1,27 @@
+{
+  "name": "project-todolist",
+  "version": "1.0.0",
+  "description": "",
+  "source": "src/index.html",
+  "browserslist": "> 0.5%, last 3 versions, not dead",
+  "scripts": {
+    "dev": "parcel",
+    "build": "parcel build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oksanaweb/todolist.git"
+  },
+  "author": "Oksana Manchuk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oksanaweb/todolist/issues"
+  },
+  "homepage": "https://github.com/oksanaweb/todolist#readme",
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.8.0",
+    "concat": "^1.0.3",
+    "parcel": "^2.8.0",
+    "sass": "^1.56.1"
+  }
+}

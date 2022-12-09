@@ -1,0 +1,24 @@
+@mixin h2 { 
+    font-family: "Raleway";
+    font-style: normal;
+    font-weight: 700;
+    font-size: $_36px;
+    line-height: 28px;}
+
+
+@mixin h4 {
+     font-family: "Raleway";
+     font-style: normal;
+     font-weight: 500;
+     font-size: $_25px;
+    line-height: 26px;}
+
+@mixin h5 {
+    font-family: "Raleway";
+     font-style: normal;
+     font-weight: 300;
+     font-size: $_20px;
+    line-height: 20px;
+}
+
+   

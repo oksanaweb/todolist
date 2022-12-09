@@ -9,7 +9,106 @@
     
 </head>
 <body>
-    
+  
+<header class="todo">
+<div class="container">
+<div class="header-wrap">
+  <div class="logo">ToDo</div>
+  <div class="logo-title">What should I do today?</div>
+  <div class="current-day">12.12.2022</div>
+</div></div>
+</header>
+
+  <section class="main">
+<div class="container">
+<div class="main-wrapper">
+ <div class="card">
+ <div class="todo-item">
+  <p class="item-text">Make ToDo</p>
+  <ul class="item-btn"><li><i class="fa-solid fa-plus add"  data-btn="make"></i></li>
+    <li><i class="fa-solid fa-trash trash"></i></li></ul> 
+   </div>
+   <div class="total"><span class="accum">Total 0</span> 
+</div>
+<div class="task-make" data-btn="make">
+  <!--<div class="card-item" id="">
+    <h3 class="card-title"></h3>
+    <div class="card-content"></div>
+    <div class="card-footer">
+      <span class="name"></span>
+      <button type="button" class="remove-maketask" data-action="delete">Remove</button>
+      <button class="send-inprogress">Send Inprogress</button>
+    </div>
+  </div>-->
+</div>
+</div>
+
+
+
+
+<div class="card">
+  <div class="todo-item">
+   <p class="item-text">In progress</p>
+   <ul class="item-btn"><li><i class="fa-solid fa-plus addnew"  data-btn="progress"></i></li>
+     <li><i class="fa-solid fa-trash trash"></i></li></ul> 
+    </div>
+<div class="total">
+  <span class="accum2">Total 0</span>
+</div>
+<div class="task-inprogress" data-btn="progress">
+  <!--<div class="card-item">
+  <h3 class="card-title"></h3>
+  <div class="card-content"></div>
+  <div class="card-footer">
+    <span class="name"></span>
+    <button class="remove-inprogress">Remove</button>
+    <button class="send-done">Send Next</button>
+    <button class="send-make">Send Back</button>
+  </div>
+</div>-->
+</div>
+ </div>
+
+
+
+ <div class="card">
+  <div class="todo-item">
+   <p class="item-text">Done</p>
+   <ul class="item-btn"><li><i class="fa-solid fa-plus adddone"  data-btn="done"></i></li>
+     <li><i class="fa-solid fa-trash trash"></i></li></ul> 
+    </div>
+    <div class="total"><span class="accum3">Total 0</span></div>
+    <div class="task-done" data-btn="done">
+    <!--<div class="card-item">
+  <h3 class="card-title"></h3>
+  <div class="card-content"></div>
+  <div class="card-footer">
+    <span class="name"></span>
+    <button class="remove-done"></button>
+    <button class="send-back-inprogress"></button>
+     </div>
+</div>-->
+
+
+    </div>
+ </div>
+
+</div></div>
+
+<div class="task active"> 
+     <form action="" class="task-form">
+      <i class="fa-solid fa-xmark close-btn"></i>
+    <h3 class="title-task">Fill in the required fields</h3>    
+    <input id="title" type="text" placeholder="title">
+    <input id="author" type="text" placeholder="author">
+    <textarea id="message" type="text" placeholder="task"></textarea> 
+    <input id="btn-create" type="submit" value="Make ToDo">
+    <input id="btn-inprogress" type="submit" value="Inprogress">
+  </form>
+</div>
+</div></section>
+  
+  
 
 
 

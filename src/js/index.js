@@ -75,8 +75,6 @@ done.forEach((element,index)=>{
 }
 
 
-
-
 function TaskUser (title,message,author) {
 this.title = title;
 this.message = message;
@@ -91,12 +89,11 @@ $CREATE.addEventListener('click',(event)=>{
   let newTaskIndex = make.lastIndexOf(newTask);
   ClearValue();
   $TASKMAKE.innerHTML += rendermake(newTask,newTaskIndex);
-  localupdate();
    let arrlength = make.length;
   $ACCUM.innerHTML = arrlength;
   localmake();
 })
-
+localupdate();
 
 function rendermake(el,i) {
   return `
@@ -132,7 +129,6 @@ function rendermake(el,i) {
       let lasttaskindex = progress.lastIndexOf(lasttask);
       ClearValue ();
       $TASKINPROGRESS.innerHTML += renderprogress(lasttask,lasttaskindex); 
-      localupdate();
       let arrProgresslength = progress.length;
       $ACCUM2.innerHTML = arrProgresslength;
       localprogress();     
@@ -163,37 +159,40 @@ if (del == "send-inprogress") {
 progress.push(make[idTask]);  
 make.splice(idTask,1);
 make.forEach((element,index)=>{
-  $TASKMAKE.innerHTML += rendermake(element,index);
-  localmake();
+  $TASKMAKE.innerHTML += rendermake(element,index); 
 });
+localmake();
 progress.forEach((element,index)=>{
   $TASKINPROGRESS.innerHTML += renderprogress(element,index);})
-  localprogress();
-  //localStorage.setItem('arr',JSON.stringify(progress)); 
+    //localStorage.setItem('arr',JSON.stringify(progress)); 
 };
+localprogress();
 $ACCUM.innerHTML = make.length;
 $ACCUM2.innerHTML = progress.length;
 })
 
 
 
-$TASKMAKE.addEventListener('click',deleteTask); 
-function deleteTask (event){
+$TASKMAKE.addEventListener('click',function(event){
   console.log(event.target);
   if (event.target.dataset.action === 'delete') {
-  let cardParent = event.target.closest('.card-item');
+  let cardParent = event.target.getAttribute('id');
     console.log(cardParent);
-   cardParent.remove();
-  let idTask = event.target.closest('id');
-  console.log(idTask); 
-  make.splice(idTask,1); 
+    $TASKMAKE.innerHTML = '';
+    make.splice(cardParent,1);
+    make.forEach((element,index)=>{
+      $TASKMAKE.innerHTML += rendermake(element,index);     
+    });   
+
     localmake();
     //localStorage.setItem('todo',JSON.stringify(make));
   let arrlength = make.length;
   $ACCUM.innerHTML = arrlength;
-  
-  }
-  }
+
+}});
+
+
+
 
   document.querySelector('.first-trash').addEventListener('click', ()=>{
     let value = document.querySelector('.task-make');
@@ -201,6 +200,7 @@ function deleteTask (event){
     make.length = 0;
     console.log(make);
     $ACCUM.innerHTML = make.length;
+    localmake();
   });
 
 
@@ -212,19 +212,19 @@ function deleteTask (event){
     console.log(idTask);
     if (del == "sendback") {
       $TASKINPROGRESS.innerHTML = '';
-    make.push(progress[idTask]);  
-    progress.splice(idTask,1);
+    make.push(progress[idTask]); 
+     progress.splice(idTask,1);
     progress.forEach((element,index)=>{
       $TASKINPROGRESS.innerHTML += renderprogress(element,index);
     });
+    localprogress();
     $TASKMAKE.innerHTML = '';
     make.forEach((element,index)=>{
-
       $TASKMAKE.innerHTML += rendermake(element,index);})
       // localStorage.setItem('arr',JSON.stringify(progress)); 
-
-
-    };$ACCUM.innerHTML = make.length;
+    };
+    localmake();
+    $ACCUM.innerHTML = make.length;
    if (del == "sendnext") {   
     $TASKINPROGRESS.innerHTML = '';
     done.push(progress[idTask]);  
@@ -232,30 +232,33 @@ function deleteTask (event){
     progress.forEach((element,index)=>{
       $TASKINPROGRESS.innerHTML += renderprogress(element,index);
     });
+    localprogress();
     $TASKDONE.innerHTML += '';
     done.forEach((element,index)=>{
     $TASKDONE.innerHTML += renderdone(element,index);
     })
+    localdone();
     } $ACCUM2.innerHTML = progress.length;
       $ACCUM3.innerHTML = done.length;
     }  
        );
 
-   $TASKINPROGRESS.addEventListener('click',deleteTask); 
-       function deleteTask (event){
-         console.log(event.target);
-         if (event.target.dataset.action === 'delete') {
-         let cardParent = event.target.closest('.card-item');
-           console.log(cardParent);
-          cardParent.remove();
-         let idTask = event.target.closest('id');
-         console.log(idTask); 
-         progress.splice(idTask,1); 
-         localStorage.setItem('arr',JSON.stringify(progress));
-         let arrlength = progress.length;
-         $ACCUM2.innerHTML = arrlength;
-         }
-         }
+ 
+     $TASKINPROGRESS.addEventListener('click',function(event){
+          console.log(event.target);
+          if (event.target.dataset.action === 'delete') {
+          let cardParent = event.target.getAttribute('id');
+            console.log(cardParent);
+            $TASKINPROGRESS.innerHTML = '';
+            progress.splice(cardParent,1);
+            progress.forEach((element,index)=>{
+              $TASKINPROGRESS.innerHTML += renderprogress(element,index);             
+            });   
+        
+            localprogress();
+            let arrlength = progress.length;
+          $ACCUM2.innerHTML = arrlength;        
+        }});
 
 
     document.querySelector('.second-trash').addEventListener('click', ()=>{
@@ -264,6 +267,7 @@ function deleteTask (event){
       progress.length = 0;
       console.log(progress);
       $ACCUM2.innerHTML = progress.length;
+      localprogress();
     });
 
     function renderdone (el,i) {
@@ -291,30 +295,31 @@ function deleteTask (event){
         done.forEach((element,index)=>{
           $TASKDONE.innerHTML += renderdone(element,index);
         });
+        localdone();
         $TASKMAKE.innerHTML += '';
     make.forEach((element,index)=>{
     $TASKMAKE.innerHTML += rendermake(element,index);
     })
+    localmake();
       }
       $ACCUM3.innerHTML = done.length;
       $ACCUM.innerHTML = make.length;
     })
 
- $TASKDONE.addEventListener('click',deleteTask); 
-  function deleteTask (event){
-  console.log(event.target);
-  if (event.target.dataset.action === 'delete') {
-  let cardParent = event.target.closest('.card-item');
-    console.log(cardParent);
-   cardParent.remove();
-  let idTask = event.target.closest('id');
-  console.log(idTask); 
-  done.splice(idTask,1); 
-  //localStorage.setItem('todo',JSON.stringify(make));
-  let arrlength = done.length;
-  $ACCUM3.innerHTML = arrlength;
-  }
-  }
+    $TASKDONE.addEventListener('click',function(event){
+      console.log(event.target);
+      if (event.target.dataset.action === 'delete') {
+      let cardParent = event.target.getAttribute('id');
+        console.log(cardParent);
+        $TASKDONE.innerHTML = '';
+        done.splice(cardParent,1);
+        done.forEach((element,index)=>{
+          $TASKINPROGRESS.innerHTML += renderdone(element,index);             
+        });   
+            localdone();
+        let arrlength = done.length;
+      $ACCUM3.innerHTML = arrlength;        
+    }});
 
   document.querySelector('.done-trash').addEventListener('click', ()=>{
     let value = document.querySelector('.task-done');
@@ -322,4 +327,5 @@ function deleteTask (event){
     done.length = 0;
     console.log(done);
     $ACCUM3.innerHTML = done.length;
+    localdone();
   });

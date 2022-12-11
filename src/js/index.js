@@ -37,7 +37,45 @@ $ADDNEW.addEventListener('click',(e)=>{
 let make = JSON.parse(localStorage.getItem('todo')) || [] 
 ;
 let progress = JSON.parse(localStorage.getItem('arr')) || [];
-let done = [];
+
+let done = JSON.parse(localStorage.getItem('done')) || [];
+
+function localmake (){
+  localStorage.setItem('todo',JSON.stringify(make));
+}
+
+function localprogress (){
+  localStorage.setItem('arr',JSON.stringify(progress));
+}
+
+function localdone (){
+  localStorage.setItem('done',JSON.stringify(done));
+}
+
+function localupdate(){
+ if (make !==[]) {
+ make.forEach((element, index)=>{
+ $TASKMAKE.innerHTML += rendermake(element,index);
+ $ACCUM.innerHTML = index + 1;
+ })
+ };
+ if (progress !== [] ) {
+ progress.forEach((element,index)=>{
+$TASKINPROGRESS.innerHTML += renderprogress(element,index);
+
+$ACCUM2.innerHTML = index + 1;})
+}
+ 
+if (done !==[]) {
+done.forEach((element,index)=>{
+  $TASKDONE.innerHTML += renderdone(element,index);
+  $ACCUM3.innerHTML = index + 1;
+})
+}
+}
+
+
+
 
 function TaskUser (title,message,author) {
 this.title = title;
@@ -53,14 +91,11 @@ $CREATE.addEventListener('click',(event)=>{
   let newTaskIndex = make.lastIndexOf(newTask);
   ClearValue();
   $TASKMAKE.innerHTML += rendermake(newTask,newTaskIndex);
-  let arrlength = make.length;
+  localupdate();
+   let arrlength = make.length;
   $ACCUM.innerHTML = arrlength;
-localStorage.setItem('todo',JSON.stringify(make));
+  localmake();
 })
-
-
-
-
 
 
 function rendermake(el,i) {
@@ -97,9 +132,10 @@ function rendermake(el,i) {
       let lasttaskindex = progress.lastIndexOf(lasttask);
       ClearValue ();
       $TASKINPROGRESS.innerHTML += renderprogress(lasttask,lasttaskindex); 
+      localupdate();
       let arrProgresslength = progress.length;
       $ACCUM2.innerHTML = arrProgresslength;
-      localStorage.setItem('arr',JSON.stringify(progress));     
+      localprogress();     
          })
  
   function renderprogress(el,i){
@@ -110,10 +146,10 @@ function rendermake(el,i) {
   <div class="card-footer">
     <span class="name">Name: ${el.author}</span><br>
     <button type="submit" class="remove-maketask" data-action="delete" id="${i}">Remove</button>
-    <button class="send-inprogress" id="${i}">Send Back</button>
+    <button class="sendback" id="${i}">Send Back</button>
+    <button class="sendnext" id="${i}">Next</button>
   </div>
 </div> `;}
-
 
 
 
@@ -128,11 +164,18 @@ progress.push(make[idTask]);
 make.splice(idTask,1);
 make.forEach((element,index)=>{
   $TASKMAKE.innerHTML += rendermake(element,index);
+  localmake();
 });
 progress.forEach((element,index)=>{
   $TASKINPROGRESS.innerHTML += renderprogress(element,index);})
-  localStorage.setItem('arr',JSON.stringify(progress)); 
-};})
+  localprogress();
+  //localStorage.setItem('arr',JSON.stringify(progress)); 
+};
+$ACCUM.innerHTML = make.length;
+$ACCUM2.innerHTML = progress.length;
+})
+
+
 
 $TASKMAKE.addEventListener('click',deleteTask); 
 function deleteTask (event){
@@ -144,8 +187,139 @@ function deleteTask (event){
   let idTask = event.target.closest('id');
   console.log(idTask); 
   make.splice(idTask,1); 
-  localStorage.setItem('todo',JSON.stringify(make));
+    localmake();
+    //localStorage.setItem('todo',JSON.stringify(make));
   let arrlength = make.length;
   $ACCUM.innerHTML = arrlength;
+  
   }
   }
+
+  document.querySelector('.first-trash').addEventListener('click', ()=>{
+    let value = document.querySelector('.task-make');
+    value.innerHTML = '';
+    make.length = 0;
+    console.log(make);
+    $ACCUM.innerHTML = make.length;
+  });
+
+
+
+  $TASKINPROGRESS.addEventListener('click', function(tasks){
+    let del = tasks.target.getAttribute('class');
+    console.log(del);
+    let idTask = tasks.target.getAttribute('id');
+    console.log(idTask);
+    if (del == "sendback") {
+      $TASKINPROGRESS.innerHTML = '';
+    make.push(progress[idTask]);  
+    progress.splice(idTask,1);
+    progress.forEach((element,index)=>{
+      $TASKINPROGRESS.innerHTML += renderprogress(element,index);
+    });
+    $TASKMAKE.innerHTML = '';
+    make.forEach((element,index)=>{
+
+      $TASKMAKE.innerHTML += rendermake(element,index);})
+      // localStorage.setItem('arr',JSON.stringify(progress)); 
+
+
+    };$ACCUM.innerHTML = make.length;
+   if (del == "sendnext") {   
+    $TASKINPROGRESS.innerHTML = '';
+    done.push(progress[idTask]);  
+    progress.splice(idTask,1);
+    progress.forEach((element,index)=>{
+      $TASKINPROGRESS.innerHTML += renderprogress(element,index);
+    });
+    $TASKDONE.innerHTML += '';
+    done.forEach((element,index)=>{
+    $TASKDONE.innerHTML += renderdone(element,index);
+    })
+    } $ACCUM2.innerHTML = progress.length;
+      $ACCUM3.innerHTML = done.length;
+    }  
+       );
+
+   $TASKINPROGRESS.addEventListener('click',deleteTask); 
+       function deleteTask (event){
+         console.log(event.target);
+         if (event.target.dataset.action === 'delete') {
+         let cardParent = event.target.closest('.card-item');
+           console.log(cardParent);
+          cardParent.remove();
+         let idTask = event.target.closest('id');
+         console.log(idTask); 
+         progress.splice(idTask,1); 
+         localStorage.setItem('arr',JSON.stringify(progress));
+         let arrlength = progress.length;
+         $ACCUM2.innerHTML = arrlength;
+         }
+         }
+
+
+    document.querySelector('.second-trash').addEventListener('click', ()=>{
+      let value = document.querySelector('.task-inprogress');
+      value.innerHTML = '';
+      progress.length = 0;
+      console.log(progress);
+      $ACCUM2.innerHTML = progress.length;
+    });
+
+    function renderdone (el,i) {
+   return `
+   <div class="card-item" id="${i}">
+  <h3 class="card-title">${el.title}</h3>
+  <div class="card-content">Task: ${el.message}</div>
+  <div class="card-footer">
+    <span class="name">Name: ${el.author}</span><br>
+    <button type="submit" class="remove-task" data-action="delete" id="${i}">Remove</button>
+    <button class="sendstart"id="${i}">Start to over</button>
+  </div>
+</div>`
+    }
+
+    $TASKDONE.addEventListener('click',function(tasks){
+      let del = tasks.target.getAttribute('class');
+      console.log(del);
+      let idTask = tasks.target.getAttribute('id');
+      console.log(idTask);
+      if (del == "sendstart"){
+        $TASKDONE.innerHTML = '';
+        make.push(done[idTask]);  
+        done.splice(idTask,1);
+        done.forEach((element,index)=>{
+          $TASKDONE.innerHTML += renderdone(element,index);
+        });
+        $TASKMAKE.innerHTML += '';
+    make.forEach((element,index)=>{
+    $TASKMAKE.innerHTML += rendermake(element,index);
+    })
+      }
+      $ACCUM3.innerHTML = done.length;
+      $ACCUM.innerHTML = make.length;
+    })
+
+ $TASKDONE.addEventListener('click',deleteTask); 
+  function deleteTask (event){
+  console.log(event.target);
+  if (event.target.dataset.action === 'delete') {
+  let cardParent = event.target.closest('.card-item');
+    console.log(cardParent);
+   cardParent.remove();
+  let idTask = event.target.closest('id');
+  console.log(idTask); 
+  done.splice(idTask,1); 
+  //localStorage.setItem('todo',JSON.stringify(make));
+  let arrlength = done.length;
+  $ACCUM3.innerHTML = arrlength;
+  }
+  }
+
+  document.querySelector('.done-trash').addEventListener('click', ()=>{
+    let value = document.querySelector('.task-done');
+    value.innerHTML = '';
+    done.length = 0;
+    console.log(done);
+    $ACCUM3.innerHTML = done.length;
+  });

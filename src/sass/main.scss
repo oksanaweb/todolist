@@ -310,3 +310,72 @@ color: $coral;
   padding: 10px 3% 10px;
 
 }
+.accum2 {
+  font-size: $_20px;
+  line-height: 20px;
+  display: block;
+  text-align: center;
+  padding: 10px 3% 10px;
+
+}
+
+.accum3 {
+  font-size: $_20px;
+  line-height: 20px;
+  display: block;
+  text-align: center;
+  padding: 10px 3% 10px;
+}
+
+
+.sendback {
+    padding: 5px 12px;
+    font-size: $_12px;
+    background-color: $blue;
+    border-radius: 10px;
+    cursor: pointer; 
+    border:none;
+    margin-top: 8px;
+    margin-bottom: 10px;
+    margin-right: 7px;
+    color:$white;
+  }
+
+  .sendnext {
+    padding: 5px 12px;
+    font-size: $_12px;
+    background-color: $blue;
+    border-radius: 10px;
+    cursor: pointer; 
+    border:none;
+    margin-top: 8px;
+    margin-bottom: 10px;
+    margin-right: 7px;
+    color:$white;
+  }
+
+  .remove-task {
+    padding: 5px 12px;
+    font-size: $_12px;
+    background-color: $blue;
+    border-radius: 10px;
+    cursor: pointer; 
+    border:none;
+    margin-top: 8px;
+    margin-bottom: 10px;
+    margin-right: 7px;
+    color:$white;
+  }
+
+  .sendstart {
+    padding: 5px 12px;
+    font-size: $_12px;
+    background-color: $blue;
+    border-radius: 10px;
+    cursor: pointer; 
+    border:none;
+    margin-top: 8px;
+    margin-bottom: 10px;
+    margin-right: 7px;
+    color:$white;
+  }

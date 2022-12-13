@@ -112,8 +112,7 @@ padding: 10px 3% 10px;;
   right: 0;
   bottom: 0;
   left: 0;
-  
-  
+  transform: translateY(180);
 
 }
 
@@ -379,3 +378,28 @@ color: $coral;
     margin-right: 7px;
     color:$white;
   }
+
+.currentdate
+ {
+  font-family: Raleway, sans-serif;
+  font-size: $_25px;
+  font-weight: 700;
+  color: #FFFF00;
+}
+
+.currentmonth {
+  font-family: Raleway, sans-serif;
+  font-size: $_25px;
+  font-weight: 700;
+  color: #FFFF00;
+}
+
+.currentyear {
+  font-family: Raleway, sans-serif;
+  font-size: $_25px;
+  font-weight: 700;
+  color: #FFFF00;
+}
+
+
+

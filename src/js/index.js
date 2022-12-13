@@ -19,8 +19,13 @@ const $ACCUM2 = document.querySelector('.accum2');
 const $ACCUM3 = document.querySelector('.accum3');
 const $DELETE = 
 document.querySelectorAll('.remove-maketask');
-const $SENDPROGRESS = document.querySelectorAll('.send-inprogress')
+const $SENDPROGRESS = document.querySelectorAll('.send-inprogress');
 
+
+let currentdate = new Date();
+document.querySelector('.currentdate').textContent = currentdate.getDate() + ".";
+document.querySelector('.currentmonth').textContent = currentdate.getMonth() + 1 + ".";
+document.querySelector('.currentyear').textContent = currentdate.getFullYear();
 
 
 $ADD.addEventListener('click',(e)=>{
@@ -162,6 +167,7 @@ make.forEach((element,index)=>{
   $TASKMAKE.innerHTML += rendermake(element,index); 
 });
 localmake();
+$TASKINPROGRESS.innerHTML = '';
 progress.forEach((element,index)=>{
   $TASKINPROGRESS.innerHTML += renderprogress(element,index);})
     //localStorage.setItem('arr',JSON.stringify(progress)); 
@@ -227,13 +233,13 @@ $TASKMAKE.addEventListener('click',function(event){
     $ACCUM.innerHTML = make.length;
    if (del == "sendnext") {   
     $TASKINPROGRESS.innerHTML = '';
-    done.push(progress[idTask]);  
+     done.push(progress[idTask]);  
     progress.splice(idTask,1);
     progress.forEach((element,index)=>{
       $TASKINPROGRESS.innerHTML += renderprogress(element,index);
     });
     localprogress();
-    $TASKDONE.innerHTML += '';
+    $TASKDONE.innerHTML = '';
     done.forEach((element,index)=>{
     $TASKDONE.innerHTML += renderdone(element,index);
     })
@@ -296,7 +302,7 @@ $TASKMAKE.addEventListener('click',function(event){
           $TASKDONE.innerHTML += renderdone(element,index);
         });
         localdone();
-        $TASKMAKE.innerHTML += '';
+        $TASKMAKE.innerHTML = '';
     make.forEach((element,index)=>{
     $TASKMAKE.innerHTML += rendermake(element,index);
     })
@@ -314,7 +320,7 @@ $TASKMAKE.addEventListener('click',function(event){
         $TASKDONE.innerHTML = '';
         done.splice(cardParent,1);
         done.forEach((element,index)=>{
-          $TASKINPROGRESS.innerHTML += renderdone(element,index);             
+          $TASKDONE.innerHTML += renderdone(element,index);             
         });   
             localdone();
         let arrlength = done.length;

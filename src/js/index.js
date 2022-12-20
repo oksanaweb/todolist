@@ -6,6 +6,7 @@ const $MESSAGE = $FORM.querySelector('#message');
 const $CREATE = $FORM.querySelector("#btn-create");
 const $BTNINPROGRESS = $FORM.querySelector("#btn-inprogress");
 const $CLOSEFORM = $FORM.querySelector('.close-btn');
+const $INPUTS = document.querySelectorAll('.input-task');
 
 const $ADD = document.querySelector('.add');
 const $ADDNEW = document.querySelector('.addnew');
@@ -20,6 +21,7 @@ const $ACCUM3 = document.querySelector('.accum3');
 const $DELETE = 
 document.querySelectorAll('.remove-maketask');
 const $SENDPROGRESS = document.querySelectorAll('.send-inprogress');
+const $INPUT = $FORM.querySelectorAll('.input-task');
 
 
 let currentdate = new Date();
@@ -88,11 +90,11 @@ this.author = author;
 
 $CREATE.addEventListener('click',(event)=>{
   event.preventDefault();
-  let todo = new TaskUser ($TITLE.value, $MESSAGE.value,$AUTHOR.value);  
-  make.push(todo);
+   let todo = new TaskUser ($TITLE.value, $MESSAGE.value,$AUTHOR.value);
+    make.push(todo);  
   let newTask = make[make.length-1];
   let newTaskIndex = make.lastIndexOf(newTask);
-  ClearValue();
+    ClearValue();  
   $TASKMAKE.innerHTML += rendermake(newTask,newTaskIndex);
    let arrlength = make.length;
   $ACCUM.innerHTML = arrlength;
@@ -121,7 +123,7 @@ function rendermake(el,i) {
   }
 
   $CLOSEFORM.addEventListener('click',(e)=>{
-    event.preventDefault();
+    e.preventDefault();
     $TASK.classList.toggle("active"); 
     $TASK.style.display = "none";
     })
@@ -335,3 +337,8 @@ $TASKMAKE.addEventListener('click',function(event){
     $ACCUM3.innerHTML = done.length;
     localdone();
   });
+
+
+
+
+

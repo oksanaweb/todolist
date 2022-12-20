@@ -1,17 +1,22 @@
 .todo {
-    padding: 20px 0;
+    padding: 20px 5px;
     border-bottom: 1px solid $grey;
     background:linear-gradient(15deg, #00a9f1, #cf00f1);
+    background-size:contain;
 }
 
 .header-wrap {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    @media (max-width:1119px){ justify-content: space-evenly;
+   }
 }
 
 
 .logo {
+  max-width: 300px;
     font-size: $_40px;
     font-weight: 600;
     line-height: 32px;
@@ -28,12 +33,14 @@
 
 
 .logo-title {
- @include h2;
+  max-width: 400px;
+ @include h4;
  color: $white;
  font-family:  "Montserrat", sans-serif;
  }
 
  .current-day {
+ max-width: 300px;
  font-size: $_25px;
  color: $black;
  font-weight: 300;

@@ -5,13 +5,23 @@
   .main-wrapper {
 display: flex;
 justify-content: space-between;
+flex-wrap: wrap;
+@media (max-width:1119px){ justify-content: space-evenly;}
+}
+
+.card { 
+  max-width: 350px;
+  padding-right: 10px;
+  @media (max-width:1100px) {width: 320px; }
+  @media (max-width:989px) {  &:nth-child(3)  {margin-top:30px;}}
+  @media (max-width:669px) {  &:nth-child(2)  {margin-top:30px;}}
 }
 
   .todo-item {
-    width: 350px;
+   max-width:350px;
     border-radius: 20px;
     border:$grey;
-  
+    padding-right: 15px;
     background-color: $blue ;
   }
 
@@ -81,6 +91,8 @@ justify-content: space-between;
   margin-top: 10px;
   border-radius: 15px;
   box-shadow:  12px 2px 1px rgba(0, 0, 255, .2);
+  padding-right: 30px;
+  @media (max-width:1100px) {width: 320px; }
 }
 
 .accum {
@@ -93,8 +105,8 @@ padding: 10px 3% 10px;;
 
 .task-form {
   width: 500px;
-  margin: 50px auto 100px auto;
-  
+  margin: 50px auto 100px auto; 
+
   
 }
 
@@ -113,8 +125,7 @@ padding: 10px 3% 10px;;
   bottom: 0;
   left: 0;
   transform: translateY(180);
-
-}
+ }
 
 .task.active {
   display: none;
@@ -163,9 +174,9 @@ padding: 10px 3% 10px;;
   resize: none;
   &:hover {
     background: $white;
-    color: $black;
-    
+    color: $black;    
   }
+ 
 }
 
 .title-task {
@@ -238,6 +249,7 @@ color: $coral;
   padding: 5px 10px;
   border-radius: 10px;
   text-align: center;
+  @media (max-width:1100px) {width: 320px; }
 }
 
 .remove-maketask {
@@ -402,4 +414,6 @@ color: $coral;
 }
 
 
-
+.input-task.error {
+box-shadow: 0 0 15px #ff0000;
+}

@@ -17,8 +17,6 @@
   <div class="logo-title">What should I do today?</div>
   <div class="current-day">
 <span class="currentdate"></span>
-<span class="currentmonth"></span>
-<span class="currentyear"></span>
   </div>
 </div></div>
 </header>
@@ -102,11 +100,12 @@
      <form action="" class="task-form">
       <i class="fa-solid fa-xmark close-btn"></i>
     <h3 class="title-task">Fill in the required fields</h3>    
-    <input id="title" type="text" class="input-task" placeholder="title">
-    <input id="author" type="text" class="input-task" placeholder="author">
-    <textarea id="message" type="text" class="input-task" placeholder="task"></textarea> 
-    <input id="btn-create" type="submit" value="Make ToDo">
-    <input id="btn-inprogress" type="submit" value="Inprogress">
+    <input autocomplete="off"  id="title" type="text" class="input-task" placeholder="title" required>
+        <input id="author" type="text" class="input-task" placeholder="author" required>
+        <textarea id="message" type="text" class="input-task" placeholder="task" required></textarea> 
+        <input disabled id="btn-create" type="submit" value="Make ToDo">
+    <input disabled id="btn-inprogress" type="submit" value="Inprogress">
+    <span class="fix-error"></span>
   </form>
 </div>
 </div></section>

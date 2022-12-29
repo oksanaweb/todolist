@@ -24,10 +24,15 @@ const $SENDPROGRESS = document.querySelectorAll('.send-inprogress');
 const $INPUT = $FORM.querySelectorAll('.input-task');
 
 
-let currentdate = new Date();
-document.querySelector('.currentdate').textContent = currentdate.getDate() + ".";
-document.querySelector('.currentmonth').textContent = currentdate.getMonth() + 1 + ".";
-document.querySelector('.currentyear').textContent = currentdate.getFullYear();
+let date = new Date()
+let day = date.getDate();
+let month = date.getMonth()+1;
+let year = date.getFullYear();
+
+
+let CurrentDate = `${day}.${month}.${year}.`;
+
+document.querySelector('.currentdate').textContent = CurrentDate; 
 
 
 $ADD.addEventListener('click',(e)=>{
@@ -81,18 +86,33 @@ done.forEach((element,index)=>{
 }
 }
 
-
 function TaskUser (title,message,author) {
 this.title = title;
 this.message = message;
 this.author = author;
 }
 
+let submitbutn = document.getElementById('btn-create');
+let newbtn = document.getElementById('btn-inprogress');
+let input = document.getElementById('title');
+input.addEventListener('keyup', (e)=>{
+console.log(e.currentTarget.value);
+const value = e.currentTarget.value;
+submitbutn.disabled = false;
+newbtn.disabled = false;
+if (value ===''){
+  submitbutn.disabled = true;
+  newbtn.disabled = true;
+  input = "";
+  } 
+})
+
+
 $CREATE.addEventListener('click',(event)=>{
   event.preventDefault();
    let todo = new TaskUser ($TITLE.value, $MESSAGE.value,$AUTHOR.value);
-    make.push(todo);  
-  let newTask = make[make.length-1];
+    make.push(todo); 
+   let newTask = make[make.length-1];
   let newTaskIndex = make.lastIndexOf(newTask);
     ClearValue();  
   $TASKMAKE.innerHTML += rendermake(newTask,newTaskIndex);
@@ -101,6 +121,8 @@ $CREATE.addEventListener('click',(event)=>{
   localmake();
 })
 localupdate();
+
+
 
 function rendermake(el,i) {
   return `
@@ -342,3 +364,4 @@ $TASKMAKE.addEventListener('click',function(event){
 
 
 
+ 
